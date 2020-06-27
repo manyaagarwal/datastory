@@ -1,5 +1,8 @@
 import React from 'react';
 import WorldMap from "./WorldMap";
+import { Form, Select } from "antd"; 
+
+const { Option } = Select; 
 
 class Home extends React.Component {
     constructor(props) {
@@ -7,7 +10,8 @@ class Home extends React.Component {
         this.state = {
             data: {
                 geoData: null,
-                cupData: null
+                cupData: null, 
+                year: "2010",
             }
         }
     }
@@ -23,11 +27,28 @@ class Home extends React.Component {
                     }
                 });
             }).catch(error => console.log(error));
+        this.setState({year:"2010"})
     }
 
     render() {
-        const { data } = this.state;
-        return <div>{data.geoData && <WorldMap data={data} />}</div>;
+        const { data,year } = this.state;
+        return <div>
+             <Form.Item
+                    name="year"
+                    label="Year">
+                    <Select defaultValue="2010" onChange={(value)=>this.setState({year:value})}>
+                        <Option value="2003">2003</Option>
+                        <Option value="2004">2004</Option>
+                        <Option value="2005">2005</Option>
+                        <Option value="2006">2006</Option>
+                        <Option value="2007">2007</Option>
+                        <Option value="2008">2008</Option>
+                        <Option value="2009">2009</Option>
+                        <Option value="2010">2010</Option>
+                    </Select>
+                </Form.Item>
+            {data.geoData && <WorldMap data={data} year={year} />}
+        </div>;
     }
 }
 

@@ -14,11 +14,11 @@
   }
 
   .state { 
-      fill:rgb(9, 157, 217); 
+      /* fill:rgb(9, 157, 217);  */
       stroke-width: 1;
   }
   .state:hover {
-    fill: grey;
+    /* fill: grey; */
     cursor: pointer;
   }
   
