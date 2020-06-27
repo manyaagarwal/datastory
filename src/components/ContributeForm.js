@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Upload } from 'antd';
+import { Form, Input, Button, Upload, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { countryList } from '../shared/countryList';
 
 const layout = {
     labelCol: {
@@ -25,6 +26,12 @@ const submitForm = (values) => {
 class ContributeForm extends Component {
 
     render() {
+        const countries = countryList.map((country) => {
+            return (
+                <Select.Option value={country}>{country}</Select.Option>
+            );
+        });
+
         return (
             <Form {...layout} name="nest-messages" onFinish={submitForm} validateMessages={validateMessages}>
                 <Form.Item
@@ -35,7 +42,9 @@ class ContributeForm extends Component {
                             required: true,
                         }
                     ]}>
-                    <Input />
+                    <Select>
+                        {countries}
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     name={['data']}
@@ -45,7 +54,7 @@ class ContributeForm extends Component {
                             required: true
                         }
                     ]}>
-                    <Upload name="data" action="/upload.do">
+                    <Upload name="data" accept=".json,.csv">
                         <Button>
                             <UploadOutlined /> Click to upload
                         </Button>
