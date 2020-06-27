@@ -26,12 +26,13 @@ const submitForm = (values) => {
         contributorId: "",
         country: values.country,
         source: values.source
-    });
-    var file = values.data.file.originFileObj;
-    FirebaseStorage.ref('/' + values.country + '/').put(file, {
-        customMetadata: {
-            'contributorId': ""
-        }
+    }).then((val) => {
+        var file = values.data.file.originFileObj;
+        FirebaseStorage.ref('/' + values.country + '/' + file.name).put(file, {
+            customMetadata: {
+                'contributorId': ""
+            }
+        });
     });
 };
 
