@@ -8,6 +8,8 @@ import Home from "../components/Home";
 import Country from "../components/Country";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp"
+import Contributions from "../components/Contributions";
+import ContributeForm from "../components/ContributeForm";
 
 class Index extends React.Component { 
     componentWillMount() {
@@ -23,6 +25,8 @@ class Index extends React.Component {
                     <AppBar>
                         <Route exact path='/' component={Home} />
                         <Route exact path='/country/:id' component={Country} />
+                        <Route exact path='/contributions' component={Contributions} />
+                        <Route exact path='/contribute' component={ContributeForm} />
                     </AppBar>
                 </Switch>
             </BrowserRouter>
