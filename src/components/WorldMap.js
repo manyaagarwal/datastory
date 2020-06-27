@@ -23,9 +23,10 @@ class WorldMap extends React.Component {
                     .append("path")
                     .on("click", feature => this.props.history.push('/country/'+ feature.id))
                     .attr("d", path)
-                    .style("fill", "rgb(9, 157, 217)")
+                    .attr("class", "state")
                     .style("stroke", "black")
                     .style("stroke-width", 0.5);
+                    
     } render() {
         const { data } = this.props;
          const styles = {
@@ -35,8 +36,7 @@ class WorldMap extends React.Component {
             }
         }; return (
             <div ref="chart" style={styles.container}>
-                <p style={{ textAlign: "center" }}> Sexual Harassment Cases Reported WorldWide
-           </p>
+                <p style={{ textAlign: "center" }}> Sexual Harassment Cases Reported WorldWide </p>
             </div>
         );
     }

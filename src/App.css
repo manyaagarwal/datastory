@@ -12,3 +12,12 @@
     margin: 16px 24px 16px 0;
     float: left;
   }
+
+  .state { 
+      fill:rgb(9, 157, 217); 
+      stroke-width: 1;
+  }
+  .state:hover {
+    fill: grey;
+    cursor: pointer;
+  }
