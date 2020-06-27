@@ -21,6 +21,7 @@ firebaseInitialized = true;
 
 let db; 
 let auth;
+let storage;
 
 if(firebaseInitialized){ 
     db = FirebaseModule.firestore();

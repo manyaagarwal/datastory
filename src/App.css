@@ -21,3 +21,23 @@
     fill: grey;
     cursor: pointer;
   }
+  
+.loginContainer{ 
+    width:400px; 
+    margin: auto;
+    margin-top:200px;
+} 
+  
+.login-form {
+    max-width: 400px;
+    margin-top: 15px;
+  }
+.login-form-forgot {
+    float: right;
+  }
+ .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+ .login-form-button {
+    width: 100%;
+  }
