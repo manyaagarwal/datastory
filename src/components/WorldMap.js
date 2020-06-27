@@ -8,6 +8,7 @@ const height = 600 - margin;
 class WorldMap extends React.Component {
     componentDidMount() {
         const { data } = this.props; 
+        const csvData = d3.csv("https://firebasestorage.googleapis.com/v0/b/datastory-a3e39.appspot.com/o/USA%2Ffvsv9410at03.csv?alt=media&token=080732d2-1259-4c75-97b0-9bb77a8957e9").then((data) => console.log(data));
         const svg = d3
             .select(this.refs.chart)
             .append("svg")

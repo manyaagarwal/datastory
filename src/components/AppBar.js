@@ -2,29 +2,29 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Layout, Menu, Breadcrumb, Button } from 'antd';
-import { LoginOutlined,LogoutOutlined } from '@ant-design/icons';
+import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
 import { signOut } from '../actions/user';
 
 const { Header, Content, Footer } = Layout;
 
 class AppBar extends React.Component {
-    componentDidMount(){
+    componentDidMount() {
 
     }
     render() {
-        const {children} = this.props; 
-        const {user} = this.props.user; 
+        const { children } = this.props;
+        const { user,admin } = this.props.user;
         return (
             <Layout>
                 <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
                     <div className="logo" />
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
+                        <Menu.Item key="2"><Link to={(admin) ? "/contributions" : "/contribute"}>{(user && admin) ? "Contributions" : "Contribute"}</Link></Menu.Item>
                         <Menu.Item key="3">nav 3</Menu.Item>
-                        { user && (
+                        {user && (
                             <Button icon={<LogoutOutlined />} onClick={() => this.props.signOut()}>Logout</Button>
-                        )} 
+                        )}
                         {!user && <Link to="/login"><Button icon={<LoginOutlined />}>Login</Button></Link>}
                     </Menu>
                 </Header>
@@ -47,16 +47,15 @@ class AppBar extends React.Component {
 
 const mapStateToProps = state => ({
     user: state.user
-  });
-  
-  const mapDispatchToProps = {
+});
+
+const mapDispatchToProps = {
     signOut
-  };
-  
-  export default withRouter(
+};
+
+export default withRouter(
     connect(
-      mapStateToProps,
-      mapDispatchToProps
+        mapStateToProps,
+        mapDispatchToProps
     )(AppBar)
-  );
-  
+);
