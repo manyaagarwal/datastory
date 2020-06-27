@@ -5,6 +5,7 @@ import App from "../App";
 import AppBar from "../components/AppBar";
 import Home from "../components/Home";
 import Country from "../components/Country";
+import ContributeForm from "../components/ContributeForm";
 
 class Index extends React.Component { 
     render(){ 
@@ -14,6 +15,7 @@ class Index extends React.Component {
                     <AppBar>
                         <Route exact path='/' component={Home} />
                         <Route exact path='/country/:id' component={Country} />
+                        <Route exact path='/contribute' component={ContributeForm} />
                     </AppBar>
                 </Switch>
             </BrowserRouter>

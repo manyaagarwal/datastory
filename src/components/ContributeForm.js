@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Button, Upload, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { countryList } from '../shared/countryList';
+import { FirebaseDB, FirebaseStorage } from '../lib/firebase';
 
 const layout = {
     labelCol: {
@@ -21,6 +22,17 @@ const validateMessages = {
 
 const submitForm = (values) => {
     console.log(values);
+    FirebaseDB.collection('contributions').add({
+        contributorId: "",
+        country: values.country,
+        source: values.source
+    });
+    var file = values.data.file.originFileObj;
+    FirebaseStorage.ref('/' + values.country + '/').put(file, {
+        customMetadata: {
+            'contributorId': ""
+        }
+    });
 };
 
 class ContributeForm extends Component {
@@ -54,7 +66,7 @@ class ContributeForm extends Component {
                             required: true
                         }
                     ]}>
-                    <Upload name="data" accept=".json,.csv">
+                    <Upload accept=".json,.csv">
                         <Button>
                             <UploadOutlined /> Click to upload
                         </Button>
