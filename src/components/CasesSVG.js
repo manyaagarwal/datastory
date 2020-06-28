@@ -35,7 +35,6 @@ export const CasesSVG = ({ url }) => {
                 let keys2 = Object.keys(rawdata[2]);
                 delete rawdata[1][keys1[0]];
                 delete rawdata[2][keys2[0]];
-                console.log(rawdata[2]);
                 let keys = keys1.slice(1);
                 let data = [];
                 keys.map(key => {
@@ -55,14 +54,12 @@ export const CasesSVG = ({ url }) => {
                     .order(stackOrderAscending);
                 const layers = stackGenerator(data);
 
-                console.log(layers);
-
                 const extent = [
                     0,
                     100
                 ];
                 const xScale = scaleBand()
-                    .domain(data.map(d => { console.log(d); return d.year }))
+                    .domain(data.map(d => d.year ))
                     .range([0, 300])
 
                 const yScale = scaleLinear()

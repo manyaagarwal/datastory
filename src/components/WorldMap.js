@@ -15,7 +15,7 @@ const WorldMap = ({ data, history,year }) => {
     const [loaded, setLoaded] = useState(false);
     
     useEffect(() => {
-        d3.csv("https://firebasestorage.googleapis.com/v0/b/datastory-a3e39.appspot.com/o/CTS12_Sexual_violence_Rate_per_100000.csv?alt=media&token=def22b68-541f-4933-91b3-ff773106de91")
+        d3.csv("https://firebasestorage.googleapis.com/v0/b/datastory-a3e39.appspot.com/o/CTS12_Sexual_violence_Rate_per_100000(1).csv?alt=media&token=9b18ce0b-40b7-45fc-85e2-db9ea61b9563")
             .then(
                 statData => {
                     setStatData(statData)
@@ -85,6 +85,7 @@ const WorldMap = ({ data, history,year }) => {
 
     return (
         <div ref={wrapperRef} style={styles.container}>
+            <p>Rate of Reported Cases of Sexual Harassment Worldwide</p>
         </div>
     );
 }

@@ -50,7 +50,7 @@ class Contributions extends React.Component {
     }
 
     getData() {
-        FirebaseDB.collection('contributions').get()
+        FirebaseDB.collection('contributions').where("status", "==", "Pending").get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 let val = doc.data();
