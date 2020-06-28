@@ -5,7 +5,6 @@ import { countryList } from '../shared/countryList';
 import { FirebaseDB, FirebaseStorage } from '../lib/firebase';
 import store from '../store/index';
 import { fetchUser } from '../actions/user';
-import { Redirect } from 'react-router-dom';
 
 const { Option } = Select;
 
