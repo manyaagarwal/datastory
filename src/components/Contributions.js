@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table,Tag, Button } from "antd"; 
 import { FirebaseDB } from '../lib/firebase';
+import update from 'immutability-helper';
 
 const columns = [
     {
@@ -22,12 +23,7 @@ const columns = [
     {
         title: "Sources",
         dataIndex: "sources",
-        key: "sources",
-        render: sources => (
-            <>
-                {sources.map(source => <a href={source}>{source}</a>)}
-            </>
-        )
+        key: "sources"
     },
     {
         title: "Status",
@@ -38,26 +34,6 @@ const columns = [
 
 ]; 
 
-function getData() {
-    let data = [];
-    FirebaseDB.collection('contributions').get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            let val = doc.data();
-            data.push({
-                id: val.contributoriId, 
-                country: val.country,
-                type: val.type,
-                sources: val.sources,
-                status: val.status
-            });
-        });
-        return data;
-    });
-}
-
-
-
 class Contributions extends React.Component {
 
     constructor(props) {
@@ -66,16 +42,36 @@ class Contributions extends React.Component {
         this.state = {
             data: []
         };
+
+        this.getData = this.getData.bind(this);
+    }
+
+    getData() {
+        FirebaseDB.collection('contributions').get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                let val = doc.data();
+                var newData = {
+                    id: val.contributoriId, 
+                    country: val.country,
+                    type: val.type,
+                    sources: val.sources,
+                    status: val.status
+                };
+                var updatedData = update(this.state.data, {$push: [newData]});
+                this.setState({ data: updatedData });
+                console.log(this.state.data);
+            });
+        });
     }
 
     componentDidMount() {
-        var fetched = getData();
-        this.setState({ data: fetched }); 
+        this.getData();
     }
 
     render() {
         return (
-            <Table columns={columns} dataSource={this.state.data} />
+            <Table columns={columns} rowKey={record => record.id} dataSource={this.state.data} />
         )
     }
 }
