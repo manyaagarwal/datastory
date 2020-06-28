@@ -21,24 +21,23 @@ class AppBar extends React.Component {
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
                         <Menu.Item key="2"><Link to={(admin) ? "/contributions" : "/contribute"}>{(user && admin) ? "Contributions" : "Contribute"}</Link></Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
                         {user && (
                             <Button icon={<LogoutOutlined />} onClick={() => this.props.signOut()}>Logout</Button>
                         )}
                         {!user && <Link to="/login"><Button icon={<LoginOutlined />}>Login</Button></Link>}
                     </Menu>
                 </Header>
-                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+                <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64, height:"85%" }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+                    <div className="site-layout-background" style={{ padding: 24, minHeight:750 }}>
                         {children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{ textAlign: 'center' }}> ©2020 Created by Social Story</Footer>
             </Layout>
         );
     }

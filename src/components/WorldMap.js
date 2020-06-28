@@ -85,6 +85,7 @@ const WorldMap = ({ data, history,year }) => {
 
     return (
         <div ref={wrapperRef} style={styles.container}>
+            <p>Rate of Reported Cases of Sexual Harassment Worldwide</p>
         </div>
     );
 }
