@@ -33,14 +33,14 @@ const submitForm = (values) => {
     }
     else {
         FirebaseDB.collection('contributions').add({
-            contributorId: "",
+            contributorId: user.user.uid,
             country: values.country,
             source: values.source
         }).then((val) => {
             var file = values.data.file.originFileObj;
             FirebaseStorage.ref('/' + values.country + '/' + file.name).put(file, {
                 customMetadata: {
-                    'contributorId': ""
+                    'contributorId': user.user.uid
                 }
             });
         });
