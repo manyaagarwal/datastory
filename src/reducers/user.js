@@ -1,9 +1,10 @@
-import { CREATE_USER_FAIL, FETCH_USER, FETCH_ADMIN, LOGIN_USER_FAIL, RESET_ERROR } from "../actions/user";
+import { CREATE_USER_FAIL, FETCH_USER, FETCH_ADMIN, LOGIN_USER_FAIL, RESET_ERROR, FETCH_CSV } from "../actions/user";
 
 export const initialState = {
   error: null,
   user: null,
   admin: null,
+  data : {},
 };
 
 export default (state = initialState, action) => {
@@ -40,6 +41,15 @@ export default (state = initialState, action) => {
         ...state,
         error: action.data
       };
+    }
+    case FETCH_CSV: { 
+      console.log(action.data); 
+      const newData = state.data; 
+      newData[action.data.type] = action.data.url; 
+      return { 
+        ...state, 
+        data: newData,
+      }
     }
     default: {
       return state;
