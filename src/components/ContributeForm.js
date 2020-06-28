@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useForm } from 'react';
 import { Form, Input, Button, Upload, Select, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { countryList } from '../shared/countryList';
@@ -26,10 +26,11 @@ const validateMessages = {
 };
 
 
-class ContributeForm extends Component {
+const ContributeForm = () => {
 
-
-    submitForm = (values) => {
+    const [form] = Form.useForm();
+    
+    const submitForm = (values) => {
         store.dispatch(fetchUser());
         var user = store.getState().user;
         console.log(values);
@@ -45,6 +46,7 @@ class ContributeForm extends Component {
                 type: values.type,
                 status: "Pending",
             }).then((val) => {
+                message.success('Contribution submitted for review!');
                 var file = values.data.file.originFileObj;
                 FirebaseStorage.ref('/' + values.country + '/' + values.type).put(file, {
                     customMetadata: {
@@ -52,79 +54,78 @@ class ContributeForm extends Component {
                     }
                 });
             });
-            message.success('Contribution submitted for review!');
+
+            form.resetFields();
 
         }
     };
 
-    render() {
-        const countries = countryList.map((country) => {
-            return (
-                <Select.Option value={country}>{country}</Select.Option>
-            );
-        });
-
+    const countries = countryList.map((country) => {
         return (
-            <Form {...layout} name="nest-messages" onFinish={this.submitForm} validateMessages={validateMessages} >
-                <Form.Item
-                    name={['country']}
-                    label="Country"
-                    rules={[
-                        {
-                            required: true,
-                        }
-                    ]}>
-                    <Select>
-                        {countries}
-                    </Select>
-                </Form.Item>
-                <Form.Item
-                    name={['data']}
-                    label="Upload Data"
-                    rules={[
-                        {
-                            required: true
-                        }
-                    ]}>
-                    <Upload accept=".json,.csv">
-                        <Button>
-                            <UploadOutlined /> Click to upload
-                        </Button>
-                    </Upload>
-                </Form.Item>
-                <Form.Item
-                    name="type"
-                    label="Type"
-                    rules={[
-                        {
-                            required: true,
-                        }
-                    ]}>
-                    <Select>
-                        <Option value="rate">Sexual assault victimization rates</Option>
-                        <Option value="minority">Victimization rates by victim characterisitics</Option>
-                        <Option value="cases">Reported and Unreported Cases</Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item
-                    name={['source']}
-                    label="Source"
-                    rules={[
-                        {
-                            required: true,
-                            type: 'url'
-                        }
-                    ]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+            <Select.Option value={country}>{country}</Select.Option>
         );
-    }
+    });
+
+    return (
+        <Form {...layout} form={form} name="nest-messages" onFinish={submitForm} validateMessages={validateMessages} >
+            <Form.Item
+                name={['country']}
+                label="Country"
+                rules={[
+                    {
+                        required: true,
+                    }
+                ]}>
+                <Select>
+                    {countries}
+                </Select>
+            </Form.Item>
+            <Form.Item
+                name={['data']}
+                label="Upload Data"
+                rules={[
+                    {
+                        required: true
+                    }
+                ]}>
+                <Upload accept=".json,.csv">
+                    <Button>
+                        <UploadOutlined /> Click to upload
+                        </Button>
+                </Upload>
+            </Form.Item>
+            <Form.Item
+                name="type"
+                label="Type"
+                rules={[
+                    {
+                        required: true,
+                    }
+                ]}>
+                <Select>
+                    <Option value="rate">Sexual assault victimization rates</Option>
+                    <Option value="minority">Victimization rates by victim characterisitics</Option>
+                    <Option value="cases">Reported and Unreported Cases</Option>
+                </Select>
+            </Form.Item>
+            <Form.Item
+                name={['source']}
+                label="Source"
+                rules={[
+                    {
+                        required: true,
+                        type: 'url'
+                    }
+                ]}>
+                <Input />
+            </Form.Item>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                    </Button>
+            </Form.Item>
+        </Form>
+    );
 }
 
 export default ContributeForm;
