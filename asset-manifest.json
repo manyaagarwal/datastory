@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/datastory/static/css/main.dc559815.chunk.css",
+    "main.js": "/datastory/static/js/main.04c6f583.chunk.js",
+    "main.js.map": "/datastory/static/js/main.04c6f583.chunk.js.map",
+    "runtime-main.js": "/datastory/static/js/runtime-main.3c75267f.js",
+    "runtime-main.js.map": "/datastory/static/js/runtime-main.3c75267f.js.map",
+    "static/css/2.3cb76441.chunk.css": "/datastory/static/css/2.3cb76441.chunk.css",
+    "static/js/2.a0a8b69d.chunk.js": "/datastory/static/js/2.a0a8b69d.chunk.js",
+    "static/js/2.a0a8b69d.chunk.js.map": "/datastory/static/js/2.a0a8b69d.chunk.js.map",
+    "index.html": "/datastory/index.html",
+    "precache-manifest.76233831a42da8c0b803fdf15f108353.js": "/datastory/precache-manifest.76233831a42da8c0b803fdf15f108353.js",
+    "service-worker.js": "/datastory/service-worker.js",
+    "static/css/2.3cb76441.chunk.css.map": "/datastory/static/css/2.3cb76441.chunk.css.map",
+    "static/css/main.dc559815.chunk.css.map": "/datastory/static/css/main.dc559815.chunk.css.map",
+    "static/js/2.a0a8b69d.chunk.js.LICENSE.txt": "/datastory/static/js/2.a0a8b69d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3c75267f.js",
+    "static/css/2.3cb76441.chunk.css",
+    "static/js/2.a0a8b69d.chunk.js",
+    "static/css/main.dc559815.chunk.css",
+    "static/js/main.04c6f583.chunk.js"
+  ]
+}
