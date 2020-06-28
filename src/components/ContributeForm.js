@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Upload, Select } from 'antd';
+import { Form, Input, Button, Upload, Select, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { countryList } from '../shared/countryList';
 import { FirebaseDB, FirebaseStorage } from '../lib/firebase';
 import store from '../store/index';
 import { fetchUser } from '../actions/user';
 import { Redirect } from 'react-router-dom';
+
+const { Option } = Select;
 
 const layout = {
     labelCol: {
@@ -23,31 +25,37 @@ const validateMessages = {
     }
 };
 
-const submitForm = (values) => {
-    store.dispatch(fetchUser());
-    var user = store.getState().user;
-    
-    if (user.user == null && !user.admin) {
-        console.log(user);
-        window.location.href = "/login";
-    }
-    else {
-        FirebaseDB.collection('contributions').add({
-            contributorId: user.user.uid,
-            country: values.country,
-            source: values.source
-        }).then((val) => {
-            var file = values.data.file.originFileObj;
-            FirebaseStorage.ref('/' + values.country + '/' + file.name).put(file, {
-                customMetadata: {
-                    'contributorId': user.user.uid
-                }
-            });
-        });
-    }
-};
 
 class ContributeForm extends Component {
+
+
+    submitForm = (values) => {
+        store.dispatch(fetchUser());
+        var user = store.getState().user;
+        console.log(values);
+        if (user.user == null && !user.admin) {
+            console.log(user);
+            window.location.href = "/login";
+        }
+        else {
+            FirebaseDB.collection('contributions').add({
+                contributorId: user.user.uid,
+                country: values.country,
+                source: values.source,
+                type: values.type,
+                status: "Pending",
+            }).then((val) => {
+                var file = values.data.file.originFileObj;
+                FirebaseStorage.ref('/' + values.country + '/' + values.type).put(file, {
+                    customMetadata: {
+                        'contributorId': user.user.uid
+                    }
+                });
+            });
+            message.success('Contribution submitted for review!');
+
+        }
+    };
 
     render() {
         const countries = countryList.map((country) => {
@@ -57,7 +65,7 @@ class ContributeForm extends Component {
         });
 
         return (
-            <Form {...layout} name="nest-messages" onFinish={submitForm} validateMessages={validateMessages}>
+            <Form {...layout} name="nest-messages" onFinish={this.submitForm} validateMessages={validateMessages} >
                 <Form.Item
                     name={['country']}
                     label="Country"
@@ -85,6 +93,20 @@ class ContributeForm extends Component {
                     </Upload>
                 </Form.Item>
                 <Form.Item
+                    name="type"
+                    label="Type"
+                    rules={[
+                        {
+                            required: true,
+                        }
+                    ]}>
+                    <Select>
+                        <Option value="rate">Sexual assault victimization rates</Option>
+                        <Option value="minority">Victimization rates by victim characterisitics</Option>
+                        <Option value="cases">Reported and Unreported Cases</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
                     name={['source']}
                     label="Source"
                     rules={[
@@ -95,7 +117,7 @@ class ContributeForm extends Component {
                     ]}>
                     <Input />
                 </Form.Item>
-                <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
