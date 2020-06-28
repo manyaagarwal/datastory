@@ -1,4 +1,4 @@
-###Social Story
+#Social Story
 
 ## Inspiration
 We were intrigued by the increase in the number of sexual harassment cases after the #MeToo movement. We decided to illustrate the data trends for each year, specifically to compare the statistics before and after the movement.
