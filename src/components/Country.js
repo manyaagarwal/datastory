@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCSV } from "../actions/user";
 import { CasesSVG } from "./CasesSVG";
+import { Row } from 'antd';
+import MinoritySVG from './MinoritySVG';
 
 class Country extends React.Component {
     componentDidMount() {
@@ -17,7 +19,12 @@ class Country extends React.Component {
         return (
             <>
             <h1>{id}</h1>
+            <Row>
+            { !!data.minority ? <MinoritySVG url={data.minority} /> : null }
+            </Row>
+            <Row>
             { !!data.cases ? <CasesSVG url={data.cases}/> : null}
+            </Row>
             </>
         )
     }
