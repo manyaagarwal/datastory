@@ -29,7 +29,9 @@ const columns = [
         title: "Status",
         dataIndex: "status",
         key: "status",
-        render: status => <Button>{status}</Button>
+        render: status => (
+            <Button ghost type="primary">{status}</Button>
+        )
     }
 
 ]; 
