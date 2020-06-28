@@ -15,8 +15,8 @@ import { Card } from "antd";
 
 const margin = { top: 20, right: 160, bottom: 35, left: 30 };
 
-const width = 460 - margin.left - margin.right;
-const height = 200 - margin.top - margin.bottom;
+const width = 560 - margin.left - margin.right;
+const height = 300 - margin.top - margin.bottom;
 
 export const CasesSVG = ({ url }) => {
     const svgRef = useRef();
@@ -46,8 +46,8 @@ export const CasesSVG = ({ url }) => {
                     })
                 });
                 const colors = {
-                    "Not Reported": "red",
-                    "Reported": "blue",
+                    "Not Reported": "#f03b20",
+                    "Reported": "#feb24c",
                 }
                 const textKeys = ["Not Reported", "Reported"]
                 const stackGenerator = stack()
@@ -91,30 +91,10 @@ export const CasesSVG = ({ url }) => {
                     .attr("transform", "translate(0," + 100 + ")")
                     .call(xAxis);
 
-                var legend = svg.selectAll(".legend")
-                    .data(colors)
-                    .enter()
-                    .append("g")
-                    .attr("class", "legend")
-                    .attr("transform", function (d, i) { return "translate(30," + i * 19 + ")"; });
-
-                legend.append("rect")
-                    .attr("x", width - 18)
-                    .attr("width", 18)
-                    .attr("height", 18)
-                    // .style("fill", function (d, i) { return colors.reverse()[i]; });
-
-                legend.append("text")
-                    .attr("x", width + 5)
-                    .attr("y", 9)
-                    .attr("dy", ".35em")
-                    .style("text-anchor", "start")
-                    .text(function (d, i) {
-                        switch (i) {
-                            case 0: return "Not Reported";
-                            case 1: return "Reported";
-                        }
-                    });
+                svg.append("circle").attr("cx", 50).attr("cy", 150).attr("r", 6).style("fill", "#f03b20")
+                svg.append("circle").attr("cx", 50).attr("cy", 170).attr("r", 6).style("fill", "#feb24c")
+                svg.append("text").attr("x", 70).attr("y", 155).text("Rate of Cases Not Reported").style("font-size", "15px").attr("alignment-baseline", "middle")
+                svg.append("text").attr("x", 70).attr("y", 175).text("Rate of Cases Reported").style("font-size", "15px").attr("alignment-baseline", "middle")
                 // const yAxis = axisLeft(yScale).ticks(10);
                 // svg.append("g").attr("class","y-axis").call(yAxis).attr("transform", "translate(0," + 100 + ")");
             }
@@ -123,8 +103,8 @@ export const CasesSVG = ({ url }) => {
 
     return (
         <React.Fragment>
-            <Card style={{width:500, marginTop:50}}>
-                <div ref={wrapperRef} style={{margin:"auto"}}>
+            <Card style={{ width: 500, marginTop: 50 }}>
+                <div ref={wrapperRef} style={{ margin: "auto" }}>
                 </div>
             </Card>
         </React.Fragment>
