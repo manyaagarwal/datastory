@@ -1,68 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+###Social Story
 
-## Available Scripts
+## Inspiration
+We were intrigued by the increase in the number of sexual harassment cases after the #MeToo movement. We decided to illustrate the data trends for each year, specifically to compare the statistics before and after the movement.
 
-In the project directory, you can run:
+## What it does
+Social Story is a web application that hopes to inform the public about the social issue of sexual harassment and how cases have risen as more people are speaking up about their story. Related data and visualizations for the U.S. is provided. As an open source project, there is a contribution form that logged-in users can access and add data for other countries from trusted sources they have found, specifically the country, the source, and CSV files. The data will be verified by the admins before being uploaded to the front-end application. 
 
-### `yarn start`
+## How I built it
+We used React as the main front-end framework for our web application and hosted the database and media storage on Google Firebase. After rendering a world map, we allow navigation to a country of choice, where the sexual harassment data for that country will be shown. We created a user authentication system and a contribution form that loads the information provided by an authenticated user to be stored in Firebase.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Challenges I ran into
+We had trouble working with asynchronous functions in Javascript and getting certain elements to render properly in the DOM. There were difficulties extracting the data from CSV files and storing them into the Firestore, as well as fetching those data from the database and displaying them visually (i.e tables, graphs, charts). We especially struggled with data visualization when attempting to use the D3 React library because of structuring the layouts.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Accomplishments that I'm proud of
+We managed to create our own authentication system and prohibit contribution to non-users. The data from the Firebase database was successfully fetched from our back-end and applied to our visualizations on the front-end.
 
-### `yarn test`
+## What I learned
+We learned about integrating Google Firebase with our React app and how to interact with the Firestore and Storage from the front-end through APIs. We got more practice programming in Javascript and understood why Promises are so important to the functionality. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## What's next for Social Story
+Social Story depends hugely on public contributions. Our web application currently only features data on the United States, so we are announcing a call to action and raise awareness on sexual harassment statistics. We plan to scrape more data from various trusted sources and expand the data availability for all countries, not just the U.S. From there, we think we could integrate other social issues in relation to sexual harassment.
