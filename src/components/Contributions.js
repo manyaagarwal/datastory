@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table,Tag, Button } from "antd"; 
+import { FirebaseDB } from '../lib/firebase';
 
 const columns = [
     {
@@ -37,12 +38,44 @@ const columns = [
 
 ]; 
 
-const data = []; 
+function getData() {
+    let data = [];
+    FirebaseDB.collection('contributions').get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let val = doc.data();
+            data.push({
+                id: val.contributoriId, 
+                country: val.country,
+                type: val.type,
+                sources: val.sources,
+                status: val.status
+            });
+        });
+        return data;
+    });
+}
+
+
 
 class Contributions extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: []
+        };
+    }
+
+    componentDidMount() {
+        var fetched = getData();
+        this.setState({ data: fetched }); 
+    }
+
     render() {
         return (
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={this.state.data} />
         )
     }
 }
