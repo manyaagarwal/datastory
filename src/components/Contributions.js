@@ -21,9 +21,10 @@ const columns = [
         key: "type"
     },
     {
-        title: "Sources",
-        dataIndex: "sources",
-        key: "sources"
+        title: "Source",
+        dataIndex: "source",
+        key: "source",
+        render: url => <a href={url}>{url}</a>
     },
     {
         title: "Status",
@@ -54,10 +55,10 @@ class Contributions extends React.Component {
             querySnapshot.forEach((doc) => {
                 let val = doc.data();
                 var newData = {
-                    id: val.contributoriId, 
+                    id: val.contributorId, 
                     country: val.country,
                     type: val.type,
-                    sources: val.sources,
+                    source: val.source,
                     status: val.status
                 };
                 var updatedData = update(this.state.data, {$push: [newData]});
