@@ -3,6 +3,9 @@ import { Form, Input, Button, Upload, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { countryList } from '../shared/countryList';
 import { FirebaseDB, FirebaseStorage } from '../lib/firebase';
+import store from '../store/index';
+import { fetchUser } from '../actions/user';
+import { Redirect } from 'react-router-dom';
 
 const layout = {
     labelCol: {
@@ -21,19 +24,27 @@ const validateMessages = {
 };
 
 const submitForm = (values) => {
-    console.log(values);
-    FirebaseDB.collection('contributions').add({
-        contributorId: "",
-        country: values.country,
-        source: values.source
-    }).then((val) => {
-        var file = values.data.file.originFileObj;
-        FirebaseStorage.ref('/' + values.country + '/' + file.name).put(file, {
-            customMetadata: {
-                'contributorId': ""
-            }
+    store.dispatch(fetchUser());
+    var user = store.getState().user;
+    
+    if (user.user == null && !user.admin) {
+        console.log(user);
+        window.location.href = "/login";
+    }
+    else {
+        FirebaseDB.collection('contributions').add({
+            contributorId: user.user.uid,
+            country: values.country,
+            source: values.source
+        }).then((val) => {
+            var file = values.data.file.originFileObj;
+            FirebaseStorage.ref('/' + values.country + '/' + file.name).put(file, {
+                customMetadata: {
+                    'contributorId': user.user.uid
+                }
+            });
         });
-    });
+    }
 };
 
 class ContributeForm extends Component {
