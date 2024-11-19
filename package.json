@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.3.5",
     "d3": "^5.16.0",
-    "firebase": "^7.15.5",
+    "firebase": "^10.9.0",
     "immutability-helper": "^3.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
